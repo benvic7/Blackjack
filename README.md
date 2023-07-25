@@ -1,5 +1,6 @@
 # Blackjack
 Authors: Ben Vicinelli and John Delucia
+
 Language: C#
 
 This program develops an interactive (backend only) blackjack game.
