@@ -29,7 +29,7 @@ The game consists of the following classes:
 
 ## How to Play
 
-1. In a C# compiler, run the `Program.cs` file to start the game. Or, run `mcs Program.cs` then `mono Program.exe`.
+1. In a C# compiler, run the `Program.cs` file to start the game. Or, run `mono Program.exe`.
 
 3. Enter the number of players participating in the game.
 
