@@ -1,7 +1,7 @@
-# Blackjack Game
+# Blackjack
 
 ## Description
-The "Blackjack Game" is a console-based application that allows multiple players to play Blackjack against a dealer, with the goal of getting a hand total as close to 21 as possible without busting. I created this game for fun with one of my peers, John Delucia.
+"Blackjack" is a console-based application that allows multiple players to play Blackjack against a dealer, with the goal of getting a hand total as close to 21 as possible without busting. I created this game for fun with one of my peers, John Delucia.
 
 Authors: **Ben Vicinelli** and **John Delucia**
 
