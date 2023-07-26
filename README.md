@@ -29,28 +29,19 @@ The game consists of the following classes:
 
 ## How to Play
 
-1. In a C# compiler, run the `Program.cs` file to start the game. Or, run `mono Program.exe`.
-
+1. Clone this repository: `https://github.com/benvic7/Blackjack.git`.
+2. In a C# compiler, run the `Program.cs` file to start the game. Or, run `mono Program.exe`.
 3. Enter the number of players participating in the game.
-
 4. For each player, enter their name and starting balance.
-
 5. The game will begin, and each player will be dealt two cards along with the dealer.
-
 6. Each player takes a turn and chooses to hit (draw another card) or stay (keep their current hand).
-
 7. The goal is to get a hand total as close to 21 as possible without going over (busting). A hand with a total of 21 is a "Blackjack."
-
 8. After all players complete their turns, the dealer will draw cards until their hand total is 17 or higher.
-
 9. The game will determine the winners and losers:
    - If a player has a higher total than the dealer, they win.
    - If a player has the same or lower total as the dealer, the dealer wins.
-
 10. Player balances will be updated accordingly based on the game outcome.
-
 11. The game will display the updated player balances, and a new round will begin automatically.
-
 12. To play another round, enter 'Y' or 'y' when prompted. To quit the game, enter any other character.
 
 
