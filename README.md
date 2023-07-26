@@ -21,7 +21,7 @@ The game consists of the following classes:
 - `CurrentRound`: contains methods for running the game logic, such as dealing cards, making bets, determining winners and losers, and updating player balances at the end of each round.
 
 
-## How to Play
+## How to Use/Play
 
 1. Clone this repository: `https://github.com/benvic7/Blackjack.git`.
 2. In a C# compiler, run the `Program.cs` file to start the game. Or, run `mono Program.exe`.
