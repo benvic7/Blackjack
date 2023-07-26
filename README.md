@@ -12,20 +12,12 @@ Langauge: **C#**
 ## Game Components
 
 The game consists of the following classes:
-
 - `Program`: contains the main method that starts the game.
-
 - `Player`: represents the player in the game. Each player has a name, balance, current hand, current wager, win/loss status, current hand total, and a flag for an Ace in their hand.
-
 - `Dealer`: represents the dealer in the game. The dealer has a name, current hand, current hand total, and a flag for an Ace in their hand.
-
 - `DeckOfCards`: represents the deck of cards used in the game. The deck is implemented as a dictionary.
-
 - `Card`: represents a single card and includes methods for drawing a card, randomizing card values, and randomizing card suits.
-
 - `CurrentRound`: contains methods for running the game logic, such as dealing cards, making bets, determining winners and losers, and updating player balances at the end of each round.
-
-
 
 ## How to Play
 
