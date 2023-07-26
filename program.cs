@@ -6,13 +6,13 @@ namespace Blackjack
 {
     class Program
     {
+        // main method calls the playGame method
         static void Main(string[] args)
         {
             PlayGame();
-
         }
 
-
+        //playGame method creates th players list, dealer, round, and deck objects and runs the game
         static void PlayGame()
         {
             List<Player> players = PlayerInformation();
@@ -22,7 +22,6 @@ namespace Blackjack
 
             int i = 1;
 
-            //Lets make this so that all these methods just call eachother instead of having to call each of these 
             while (true)
             {
                 round.beginRound(i);
@@ -33,16 +32,15 @@ namespace Blackjack
             }
         }
 
+        // PlayerInformation gets the player's information from the user and creates the player object(s)
         static List<Player> PlayerInformation()
         {
-
-            //Create Players
 
             Console.WriteLine("Hello and Welcome to Black Jack\n");
             Console.Write("Please enter the number of players (Ex. 2): ");
 
+            // reading the number of players from the user
             int numberOfPlayers;
-
             while (true)
             {
                 try
@@ -57,7 +55,7 @@ namespace Blackjack
                 }
             }
 
-
+            // creating the player(s) object (name and balance)
             List<Player> playerObjects = new List<Player>();
             for (int i = 1; i < numberOfPlayers + 1; i++)
             {
@@ -84,21 +82,14 @@ namespace Blackjack
             }
 
             return playerObjects;
-
-            //Create Dealer
-            //Interesting idea: pull names from a database for the dealer (randomly generate a number then choose a name from the dataBase)
-
-
         }
 
+        // DealerInformation creates the dealer object
         static Object DealerInformation()
         {
-            //Create Dealer
-            //Interesting idea: pull names from a database for the dealer (randomly generate a number then choose a name from the dataBase)
-
             Dealer dealer = new Dealer();
 
-            //temporary hard coded dealer
+            // hardcoded dealer name (could be changed later)
             dealer.DealerName = "Jack";
             dealer.Balance = 100000;
             return dealer;
@@ -106,6 +97,7 @@ namespace Blackjack
 
         }
 
+        // PopulateDictionary populates the deck (as a dictionary)
         public static Object PopulateDictionary()
         {
             DeckOfCards deck = new DeckOfCards();
@@ -167,9 +159,10 @@ namespace Blackjack
         }
     }
 
+    // Player class
     class Player
     {
-        //initializing variables
+        // initializing variables
         private string playerName;
         private int balance;
         private ArrayList currentPlayerHand = new ArrayList();
@@ -179,7 +172,7 @@ namespace Blackjack
         private Boolean hasAce;
 
 
-        //constructor for player object
+        // constructor for player object
         public Player()
         {
             playerName = "";
@@ -200,46 +193,49 @@ namespace Blackjack
             hasAce = false;
         }
 
-        //setter and getter for the player's name
+        // setter and getter for the player's name
         public string PlayerName
         {
             get { return playerName; }
             set { playerName = value; }
         }
 
-        //setter and getter for the player's balance
+        // setter and getter for the player's balance
         public int Balance
         {
             get { return balance; }
             set { balance = value; }
         }
 
-        //setter and getter for the player's current wager
+        // setter and getter for the player's current wager
         public int CurrentWager
         {
             get { return currentWager; }
             set { currentWager = value; }
         }
 
-        //setter and getter for the player's current hand
+        // setter and getter for the player's current hand
         public ArrayList CurrentPlayerHand
         {
             get { return currentPlayerHand; }
             set { currentPlayerHand.Add(value); }
         }
 
+        // setter and getter to note if the player won or lost
         public string WinOrLose
         {
             get { return winOrLose; }
             set { winOrLose = value; }
         }
 
+        // setter and getter for the current hand total
         public int CurrentHandTotal
         {
             get { return currentHandTotal; }
             set { currentHandTotal = value; }
         }
 
+        // setter and getter to note if the player has an ace (can be an 11 or a 1)
         public Boolean HasAce
         {
             get { return hasAce; }
@@ -248,16 +244,17 @@ namespace Blackjack
 
     }
 
-    class Dealer //Dealer Class 
+    // Dealer class
+    class Dealer
     {
-        //Declaring Variables 
+        // initializing variables 
         private string dealerName;
         private ArrayList currentDealerHand = new ArrayList();
         private int balance;
         private int currentHandTotal;
         private Boolean hasAce;
 
-        //Default Constructor
+        // constructor for dealer object
         public Dealer()
         {
             dealerName = "";
@@ -266,33 +263,35 @@ namespace Blackjack
             hasAce = false;
         }
 
-        //Getters and Setters for Balance
+        // setter and getter for balance
         public int Balance
         {
             get { return balance; }
             set { balance = value; }
         }
 
-        //Getters and Setters for DealerName
+        // setter and getter for dealer name
         public string DealerName
         {
             get { return dealerName; }
             set { dealerName = value; }
         }
 
-        //Getters and Setter for DealersCurrentHand
+        // setter and getter for the dealer's current hand
         public ArrayList DealersCurrentHand
         {
             get { return currentDealerHand; }
             set { currentDealerHand = value; }
         }
 
+        // setter and getter for the dealer's current hand amount
         public int CurrentHandTotal
         {
             get { return currentHandTotal; }
             set { currentHandTotal = value; }
         }
 
+        // setter and getter to note if the dealer has an ace (can be an 11 or a 1)
         public Boolean HasAce
         {
             get { return hasAce; }
@@ -301,30 +300,34 @@ namespace Blackjack
     }
 
 
+    // Deck of Cards class
     class DeckOfCards
     {
+        // initializing and populating the deck
         private Dictionary<string, ArrayList> deck = new Dictionary<string, ArrayList>();
 
-        //setter and getter for deck
         public void PopulateDictionary(string key, int value)
         {
-            //temporary arrayList, which adds the value passed in and sets the number of appearences to 0
+            // temporary arrayList which adds the value passed in and sets the number of appearances to 0
             ArrayList tempAL = new ArrayList();
             tempAL.Add(value);
             tempAL.Add(0);
             deck.Add(key, tempAL);
         }
 
+        // returns the value of a card
         public int GetCardValue(string key)
         {
             return (int)deck[key][0];
         }
 
+        // returns the count of the card
         public int GetCardCount(string key)
         {
             return (int)deck[key][1];
         }
 
+        // updates the deck and suffles if necessary 
         public void updateDeck(string key)
         {
             deck[key][1] = (int)deck[key][1] + 1;
@@ -334,6 +337,7 @@ namespace Blackjack
             }
         }
 
+        // Shuffling the deck
         public void shuffleDeck()
         {
             foreach (KeyValuePair<string, ArrayList> entry in deck)
@@ -344,18 +348,20 @@ namespace Blackjack
         }
     }
 
+    // Card class
     class Card
     {
+        // gets the card value and suit type to draw a card
         public string drawCard()
         {
             return cardValue() + suitType();
-
         }
 
+        // randomizes the card value
         public string cardValue()
         {
             Random rand = new Random();
-            int cardValue = rand.Next(1, 14); //select card value
+            int cardValue = rand.Next(1, 14);
 
             if (cardValue == 13)
             {
@@ -411,10 +417,11 @@ namespace Blackjack
             }
         }
 
+        // randomizes the card suit
         public string suitType()
         {
             Random rand = new Random();
-            int suitType = rand.Next(0, 4); //select suit of cards
+            int suitType = rand.Next(0, 4);
 
             if (suitType == 0)
             {
@@ -435,14 +442,17 @@ namespace Blackjack
         }
     }
 
+    // class that structures the current round
     class CurrentRound
     {
+        // if your total card value is greater than 21, you bust
         public Boolean bust(int total)
         {
             return total > 21;
 
         }
 
+        // calculates the total for a hand
         public int handTotal(ArrayList hand, DeckOfCards deck, Boolean hasAce)
         {
             int total = 0;
@@ -452,6 +462,7 @@ namespace Blackjack
             {
                 total += deck.GetCardValue((string)hand[i]);
 
+                //change the ace's value from an 11 to a 1 if we are going to bust and have an ace
                 if (hasAce && bust(total))
                 {
                     total -= 10;
@@ -463,53 +474,44 @@ namespace Blackjack
 
         }
 
+        // method to deal cards
         public void dealCards(List<Player> players, Dealer dealer)
         {
 
             Card card = new Card();
             string cardName = "";
 
-            for (int i = 0; i < players.Count; i++)
-            {
+            // running twice because each player (and the dealer) is dealt two cards
+            for (int i = 0; i < 2; i++) {
+
+                // drawing a card for each player
+                for (int j = 0; j < players.Count; j++) {
+                    cardName = card.drawCard();
+                    if (cardName.Substring(0, 1) == "A") //if the card is an ace
+                    {
+                        players[j].HasAce = true;
+                    }
+                    players[j].CurrentPlayerHand.Add(cardName);
+                }
+
+                // drawing a card for the dealer
                 cardName = card.drawCard();
                 if (cardName.Substring(0, 1) == "A") //if the card is an ace
                 {
-                    players[i].HasAce = true;
+                    dealer.HasAce = true;
                 }
-                players[i].CurrentPlayerHand.Add(cardName);
+                dealer.DealersCurrentHand.Add(cardName);
             }
-            cardName = card.drawCard();
-            if (cardName.Substring(0, 1) == "A") //if the card is an ace
-            {
-                dealer.HasAce = true;
-            }
-            dealer.DealersCurrentHand.Add(cardName);
-
-            for (int i = 0; i < players.Count; i++)
-            {
-                cardName = card.drawCard();
-                if (cardName.Substring(0, 1) == "A") //if the card is an ace
-                {
-                    players[i].HasAce = true;
-                }
-                players[i].CurrentPlayerHand.Add(cardName);
-            }
-            cardName = card.drawCard();
-            if (cardName.Substring(0, 1) == "A") //if the card is an ace
-            {
-                dealer.HasAce = true;
-            }
-            dealer.DealersCurrentHand.Add(cardName);
-
         }
 
+        // method for players to make bets
         public void makeBets(List<Player> players)
         {
             for (int i = 0; i < players.Count; i++)
             {
                 Console.Write(players[i].PlayerName + ", please enter how much you want to bet (Ex. 50): ");
 
-                //Need to check if the current wager is bigger than the players balance 
+                // need to check if the current wager is bigger than the players balance 
                 while (true)
                 {
                     try
@@ -529,8 +531,8 @@ namespace Blackjack
 
         }
 
-
-        //might have to break this into three methods (hitOrStay, hit, stay)
+        // method to hit or stay
+        // might have to break this into three methods (hitOrStay, hit, stay)
         public void hitOrStay(List<Player> players, Dealer dealer, DeckOfCards deck)
         {
             int i = 0;
@@ -540,11 +542,11 @@ namespace Blackjack
             {
                 players[i].CurrentHandTotal = handTotal(players[i].CurrentPlayerHand, deck, players[i].HasAce);
 
-                if (players[i].CurrentHandTotal == 21 && players[i].CurrentPlayerHand.Count == 2) //Check for blackjack
+                if (players[i].CurrentHandTotal == 21 && players[i].CurrentPlayerHand.Count == 2) // dheck for blackjack
                 {
                     Console.Write("\nBLACKJACK! " + players[i].PlayerName + ", your cards are: " +
                     players[i].CurrentPlayerHand[0] + " " + players[i].CurrentPlayerHand[1] + " (" + players[i].CurrentHandTotal + ")\n");
-                    players[i].Balance += players[i].CurrentHandTotal / 2; //3 to 2 return on BLACKJACK
+                    players[i].Balance += players[i].CurrentHandTotal / 2; // 3 to 2 return on BLACKJACK
                     i++;
 
                 }
@@ -565,27 +567,27 @@ namespace Blackjack
                     string userInput = Console.ReadLine();
                     while (true)
                     {
-                        if (userInput.ToLower() == "h") //player hits
+                        if (userInput.ToLower() == "h") // player hits
                         {
-                            //draw a card and find new hand total
+                            // draw a card and find new hand total
                             players[i].CurrentPlayerHand.Add(card.drawCard());
                             players[i].CurrentHandTotal = handTotal(players[i].CurrentPlayerHand, deck, players[i].HasAce);
 
-                            if (bust(players[i].CurrentHandTotal)) //player busts
+                            if (bust(players[i].CurrentHandTotal)) // player busts
                             {
                                 bustCounter++;
-                                Console.Write("\nBUST " + players[i].PlayerName + ", your cards are: "); //tell user they busted
-                                for (int j = 0; j < players[i].CurrentPlayerHand.Count; j++) //print users hand
+                                Console.Write("\nBUST " + players[i].PlayerName + ", your cards are: "); // tell user they busted
+                                for (int j = 0; j < players[i].CurrentPlayerHand.Count; j++) // print users hand
                                 {
                                     Console.Write(players[i].CurrentPlayerHand[j] + " ");
                                 }
-                                Console.Write("(" + players[i].CurrentHandTotal + ")\n"); //print value of the hand next to their cards
+                                Console.Write("(" + players[i].CurrentHandTotal + ")\n"); // print value of the hand next to their cards
 
-                                i++; //increment to next player
+                                i++; // increment to next player
                             }
-                            else if (players[i].CurrentHandTotal == 21) //player gets 21
+                            else if (players[i].CurrentHandTotal == 21) // player gets 21
                             {
-                                Console.Write(players[i].PlayerName + ", your cards are: "); //print players cards
+                                Console.Write(players[i].PlayerName + ", your cards are: "); // print players cards
                                 for (int j = 0; j < players[i].CurrentPlayerHand.Count; j++)
                                 {
                                     Console.Write(players[i].CurrentPlayerHand[j] + " ");
@@ -596,7 +598,7 @@ namespace Blackjack
                             break;
 
                         }
-                        else if (userInput.ToLower() == "s") //user stays
+                        else if (userInput.ToLower() == "s") // user stays
                         {
                             i++;
                             break;
@@ -618,6 +620,7 @@ namespace Blackjack
 
             Console.Write("\nThe dealers cards are: " + dealer.DealersCurrentHand[0] + " " + dealer.DealersCurrentHand[1] + " ");
 
+            // the dealer will continue to hit until his total is 17 or higher
             while (dealer.CurrentHandTotal < 17 && bustCounter != players.Count)
             {
                 dealer.DealersCurrentHand.Add(card.drawCard());
@@ -632,7 +635,7 @@ namespace Blackjack
         }
 
 
-
+        // method to determine the winners and losers of the round
         public void determineWinnersAndLosers(List<Player> players, Dealer dealer, DeckOfCards deck)
         {
             Console.WriteLine("\n");
@@ -668,6 +671,7 @@ namespace Blackjack
             updateBalances(players, dealer, deck);
         }
 
+        // method to update the player balances or dealer balance based on whether they won or lost
         public void updateBalances(List<Player> players, Dealer dealer, DeckOfCards deck)
         {
             for (int i = 0; i < players.Count; i++)
@@ -686,24 +690,26 @@ namespace Blackjack
             endRound(players, dealer, deck);
         }
 
+        // method to begin a new round
         public void beginRound(int roundNumber)
         {
             Console.WriteLine("\nRound " + roundNumber + ": Place Your Bets\n");
 
         }
 
+        // method to end the current round
         public void endRound(List<Player> players, Dealer dealer, DeckOfCards deck)
         {
             Console.WriteLine("Updated Player Balances: \n");
-            //update deck
+
             for (int i = 0; i < players.Count; i++)
             {
-
+                // give each player's balance
                 Console.WriteLine(players[i].PlayerName + "'s Balance: " + players[i].Balance);
 
                 for (int j = 0; j < players[i].CurrentPlayerHand.Count; j++)
                 {
-                    //update deck
+                    // update the deck
                     string card = (string)players[i].CurrentPlayerHand[j];
                     deck.updateDeck(card);
 
@@ -711,7 +717,7 @@ namespace Blackjack
             }
 
 
-            //reset all variables
+            // reset all variables
             for (int i = 0; i < players.Count; i++)
             {
                 players[i].CurrentHandTotal = 0;
@@ -722,7 +728,6 @@ namespace Blackjack
             }
             dealer.CurrentHandTotal = 0;
             dealer.DealersCurrentHand.Clear();
-
         }
     }
 }
